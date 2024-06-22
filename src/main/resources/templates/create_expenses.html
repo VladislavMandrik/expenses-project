@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>New Expenses</title>
+</head>
+<body>
+<div align="center">
+    <h2>New Expenses</h2>
+    <form action="save" method="post" modelAttribute="customer">
+        <table border="0" cellpadding="5">
+            <tr>
+                <td>Имя:</td>
+                <td>
+                    <select name="name">
+                        <option value="V">Влад</option>
+                        <option value="J">Юля</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>Категория:</td>
+                <td><input name="category"/></td>
+            </tr>
+            <tr>
+                <td>Комментарии:</td>
+                <td><input name="comments"/></td>
+            </tr>
+            <tr>
+                <td>Сумма:</td>
+                <td><input name="sum"/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Сохранить"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
