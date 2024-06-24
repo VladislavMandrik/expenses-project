@@ -33,6 +33,7 @@ public class Scheduler {
         } catch (IOException e) {
             System.err.println(LocalDateTime.now() + " " + "An error occurred during warm up request" + url);
         } finally {
+
             Objects.requireNonNull(connection).disconnect();
         }
     }
