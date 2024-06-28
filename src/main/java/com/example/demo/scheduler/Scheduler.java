@@ -25,7 +25,7 @@ public class Scheduler {
         HttpURLConnection connection = null;
 
         try {
-            url = new URL("https://exp-nvaz.onrender.com/get");
+            url = new URL("https://exp-5sn7.onrender.com/get");
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
