@@ -53,5 +53,4 @@ public interface ExpensesRepository extends JpaRepository<Expenses, Long> {
     List<Integer> getSumByCategoryJ(Timestamp from, Timestamp to);
     @Query(value = "select category from expenses where date between :from and :to and deleted = false and name = 'J' and category != 'ЗП' group by category", nativeQuery = true)
     List<String> getCategoryByCategoryJ(Timestamp from, Timestamp to);
-//    List<Expenses> findAllByMasterName(String s);
 }

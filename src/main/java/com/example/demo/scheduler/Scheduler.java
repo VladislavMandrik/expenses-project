@@ -5,9 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -20,7 +18,6 @@ public class Scheduler {
 
     @Scheduled(initialDelay = 800000, fixedRate = 900000)
     public void scheduleFixedRateTask() {
-
         URL url = null;
         HttpURLConnection connection = null;
 
@@ -33,7 +30,6 @@ public class Scheduler {
         } catch (IOException e) {
             System.err.println(LocalDateTime.now() + " " + "An error occurred during warm up request" + url);
         } finally {
-
             Objects.requireNonNull(connection).disconnect();
         }
     }

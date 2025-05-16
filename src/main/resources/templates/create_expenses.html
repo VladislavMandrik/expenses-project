@@ -1,39 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>New Expenses</title>
+    <link rel="stylesheet" href="/css/create_expenses.css">
 </head>
 <body>
-<div align="center">
-    <h2>New Expenses</h2>
-    <form action="save" method="post" modelAttribute="customer">
+
+<div class="center">
+    <h2>НОВЫЙ РАСХОД</h2>
+    <form class="form" action="save" method="post" modelAttribute="customer">
         <table border="0" cellpadding="5">
             <tr>
                 <td>Имя:</td>
                 <td>
-                    <select name="name">
+                    <select class="fa" name="name">
                         <option value="V">Влад</option>
                         <option value="J">Юля</option>
                     </select></td>
             </tr>
             <tr>
                 <td>Категория:</td>
-                <td><input name="category"/></td>
+                <td><input name="category" placeholder="имя"/></td>
             </tr>
             <tr>
                 <td>Комментарии:</td>
-                <td><input name="comments"/></td>
+                <td><input name="comments" placeholder="коммент"/></td>
             </tr>
             <tr>
                 <td>Сумма:</td>
-                <td><input name="sum"/></td>
+                <td><input name="sum" placeholder="сумма"/></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" value="Сохранить"></td>
+                <td colspan="2"><input class='btn5' type="submit" value="Сохранить"></td>
             </tr>
         </table>
     </form>
+
 </div>
+
 </body>
 </html>

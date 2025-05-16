@@ -25,46 +25,23 @@ public class ExpensesControllerImpl implements ExpensesController {
     private Timestamp filterFrom;
     private Timestamp filterTo;
     private String filterCategory;
-
     private Timestamp salaryFilterFrom;
     private Timestamp salaryFilterTo;
 
-//    @PostMapping("/create")
-//    public String createStandings() {
-//        standingsService.createStandings();
-//        return "table-created_page";
-//    }
-
-    @GetMapping("/get")
     public String getExpenses(Model model) {
-//        List<Expenses> listExpensesV = expensesRepository.findAllByNameAndCategoryNot("V", "ЗП");
-//        List<Expenses> listExpensesJ = expensesRepository.findAllByNameAndCategoryNot("J", "ЗП");
-
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-//        Collections.sort(listExpensesV, Comparator.comparing(o -> LocalDateTime.parse(o.getDate(), formatter)));
-//        Collections.sort(listExpensesJ, Comparator.comparing(o -> LocalDateTime.parse(o.getDate(), formatter)));
-//        Collections.reverse(listExpensesV);
-//        Collections.reverse(listExpensesJ);
-
-        model.addAttribute("expensesV", expensesRepository.findAllByNameAndCategoryNotOrderByDateDesc("V", "ЗП")
-//                listExpensesV
-        );
-        model.addAttribute("expensesJ", expensesRepository.findAllByNameAndCategoryNotOrderByDateDesc("J", "ЗП")
-//                listExpensesJ
-        );
+        model.addAttribute("expensesV", expensesRepository.findAllByNameAndCategoryNotOrderByDateDesc("V", "ЗП"));
+        model.addAttribute("expensesJ", expensesRepository.findAllByNameAndCategoryNotOrderByDateDesc("J", "ЗП"));
         model.addAttribute("V", expensesRepository.getV(expensesRepository.getVZP()));
         model.addAttribute("J", expensesRepository.getJ(expensesRepository.getJZP()));
         return "expenses_page";
     }
 
-    @GetMapping("/new")
     public String newExpenses(Map<String, Object> model) {
         Expenses expenses = new Expenses();
         model.put("expenses", expenses);
         return "create_expenses";
     }
 
-    @GetMapping("edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         Expenses expenses = expensesRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid expenses Id:" + id));
@@ -73,7 +50,6 @@ public class ExpensesControllerImpl implements ExpensesController {
         return "edit_expenses";
     }
 
-    @PostMapping("update/{id}")
     public String updateExpenses(@PathVariable("id") long id, @Valid Expenses expenses, BindingResult result,
                                  Model model) {
         if (result.hasErrors()) {
@@ -88,16 +64,14 @@ public class ExpensesControllerImpl implements ExpensesController {
         return "redirect:/get";
     }
 
-    @PostMapping("/save")
     public String saveExpenses(@ModelAttribute("expenses") Expenses expenses) {
         expenses.setDate(new Timestamp(System.currentTimeMillis())
 //                .now(ZoneId.of("Europe/Moscow")
-                );
+        );
         expensesRepository.save(expenses);
         return "redirect:/get";
     }
 
-    @GetMapping("delete/{id}")
     public String showDeleteForm(@PathVariable("id") long id) {
         Expenses expenses = expensesRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid expenses Id:" + id));
@@ -105,7 +79,6 @@ public class ExpensesControllerImpl implements ExpensesController {
         return "redirect:/get";
     }
 
-    @GetMapping("/filter")
     public String filter(Model model) {
         if (!Objects.equals(filterCategory, "")) {
             model.addAttribute("filteredV", expensesRepository.getFilteredV(filterFrom, filterTo, filterCategory));
@@ -173,7 +146,6 @@ public class ExpensesControllerImpl implements ExpensesController {
         return "filter_expenses";
     }
 
-    @PostMapping("/new-filter")
     public String newFilter(@RequestParam("from") String from, @RequestParam("to") String to, @RequestParam("category") String category) {
         filterFrom = Timestamp.valueOf(from + " 00:00:00");
         filterTo = Timestamp.valueOf(to + " 23:59:59");
@@ -181,7 +153,6 @@ public class ExpensesControllerImpl implements ExpensesController {
         return "redirect:/filter";
     }
 
-    @GetMapping("/salary")
     public String getSalary(Model model) {
         model.addAttribute("salaryV", expensesRepository.getFilteredSalaryV(salaryFilterFrom, salaryFilterTo));
         model.addAttribute("salaryJHair", expensesRepository.getFilteredSalaryHairJ(salaryFilterFrom, salaryFilterTo));
@@ -189,7 +160,6 @@ public class ExpensesControllerImpl implements ExpensesController {
         return "salary_page";
     }
 
-    @PostMapping("/salary-filter")
     public String salaryFilter(@RequestParam("from") Timestamp from, @RequestParam("to") Timestamp to) {
         salaryFilterFrom = from;
         salaryFilterTo = to;

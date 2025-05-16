@@ -24,7 +24,9 @@ public class Expenses {
     private String category;
     private Integer sum;
     private String comments;
-    public Expenses(Long id, boolean deleted, Timestamp date, String name, String category, Integer sum, String comments) {
+
+    public Expenses(Long id, boolean deleted, Timestamp date, String name, String category,
+                    Integer sum, String comments) {
         this.id = id;
         this.deleted = deleted;
         this.date = date;
